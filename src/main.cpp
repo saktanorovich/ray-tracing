@@ -1,4 +1,3 @@
-
 #include <rt/math.hpp>
 #include <iostream>
 

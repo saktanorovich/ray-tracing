@@ -2,23 +2,6 @@
 
 **rt** — a lightweight C++ demo app for ray-traicing.
 
-RU:
-
-Функция, которая принимает координаты 4-х трехмерных точек: a, b, L, U.
-Координаты данных точек представлены в формате double.
-
-Точки a, b использованы для описания траектории луча, где точка а - начало. a != b.
-
-Точки L и U использованы для описания противоположных вершин axis aligned bounding box (AABB).
-L - точка с меньшими координатами, U - вершина с большими координатами. L != U
-
-Определите, пересекает ли луч (a,b) заданный AABB (L,U), и если пересекает, то вычислите первую точку пересечения.
-Пересечением достаточно считать только те случаи, когда сегмент луча лежащий строго внутри AABB имеет ненулевую длину.
-Рассмотрение краевых случаев (луч проходит по грани AABB или касается ребра/вершины) - опционально.
-
-Сигнатуру функции выбирайте на свое усмотрение. Результат в виде приложения.
-
-
 ---
 
 ## 📋 Prerequisites
@@ -26,20 +9,29 @@ L - точка с меньшими координатами, U - вершина 
 - **Operating System**: macOS (arm64)
 - **Compiler**: g++ or clang with C++17 support
 - **Build System**: CMake ≥ 3.30
+- **Tests** Python3: 3.14.0
 - **Tools**:
   - `make` to build the project
   - `git` to clone the repository
+- **Win**:
+  - Git for Windows/x64 Setup (Git-2.52.0-64-bit)
+  - Python3 (python-3.14.2-amd64)
+  - CMake (cmake-4.2.1-windows-x86_64.msi)
+  - VS (https://visualstudio.microsoft.com/vs/community/)
 
+    - Visual Studio 2026 Developer Command Prompt v18.2.0
+  - PY
+    -  pip install matplotlib
 ---
 
 ## 📚 Required Libraries
 
 - **Standard C++ Library (std)** — core language support
-- **GoogleTest (gtest)** — unit testing framework
+- **Python3 (python)** — to run tests
 
 ---
 
-## 🚀 How to Run
+## 🚀 How to Run (win)
 
 1. **Clone the repository**
    ```bash
@@ -47,10 +39,32 @@ L - точка с меньшими координатами, U - вершина 
    cd ray-tracing
 2. **Build the project**
    ```bash
-   mkdir build && cd build
+   rmdir /s /q build bin
+   mkdir build
+   cd build
+   cmake .. -G "NMake Makefiles"
+   nmake
+   cd ../
+3. **Run the application**
+   ```bash
+   python ./tests.py
+   python ./check.py
+
+---
+
+## 🚀 How to Run (mac)
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/saktanorovich/ray-tracing.git
+   cd ray-tracing
+2. **Build the project**
+   ```bash
+   rm -rf build bin && mkdir build && cd build
    cmake ..
    make
    cd ../
 3. **Run the application**
    ```bash
-   ./bin/rt
+   python3 ./tests.py
+   python3 ./check.py
